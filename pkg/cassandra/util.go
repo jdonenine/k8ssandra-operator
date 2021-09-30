@@ -32,6 +32,8 @@ func DatacenterStopping(dc *cassdcapi.CassandraDatacenter) bool {
 
 func ComputeSystemReplication(kluster *api.K8ssandraCluster) SystemReplication {
 	rf := 3.0
+	rf = 2.0
+	rf = 3.0
 	for _, dc := range kluster.Spec.Cassandra.Datacenters {
 		rf = math.Min(rf, float64(dc.Size))
 	}
