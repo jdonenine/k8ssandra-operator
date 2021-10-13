@@ -13,10 +13,10 @@ spec:
     kind: K8ssandraCluster
     listKind: K8ssandraClusterList
     plural: k8ssandraclusters
-    singular: k8ssandracluster
     shortNames:
     - k8c
     - k8cs
+    singular: k8ssandracluster
   scope: Namespaced
   versions:
   - name: v1alpha1
