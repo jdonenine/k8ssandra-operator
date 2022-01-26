@@ -8,6 +8,8 @@ SHELL := /bin/bash
 # - use environment variables to overwrite this value (e.g export VERSION=0.0.2)
 VERSION ?= 0.0.1
 
+NUM_CLUSTERS := 2
+
 # CHANNELS define the bundle channels used in the bundle.
 # Add a new line here if you would like to change its default config. (E.g CHANNELS = "preview,fast,stable")
 # To re-generate a bundle for other specific channels without changing the standard setup, you can:
@@ -215,14 +217,15 @@ multi-deploy:
 	kubectl -n $(NS) apply -f test/testdata/samples/k8ssandra-multi-kind.yaml
 
 cleanup:
-	kind delete cluster --name k8ssandra-0
-	kind delete cluster --name k8ssandra-1
+	for ((i = 0; i < $(NUM_CLUSTERS); ++i)); do \
+		kind delete cluster --name k8ssandra-$$i; \
+	done
 
 create-kind-cluster:
 	scripts/setup-kind-multicluster.sh --clusters 1 --kind-worker-nodes 4
 
 create-kind-multicluster:
-	scripts/setup-kind-multicluster.sh --clusters 2 --kind-worker-nodes 4
+	scripts/setup-kind-multicluster.sh --clusters $(NUM_CLUSTERS) --kind-worker-nodes 4
 
 kind-load-image-multi:
 	kind load docker-image --name k8ssandra-0 ${IMG}
