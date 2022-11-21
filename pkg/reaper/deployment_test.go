@@ -8,6 +8,7 @@ import (
 	reaperapi "github.com/k8ssandra/k8ssandra-operator/apis/reaper/v1alpha1"
 	"github.com/k8ssandra/k8ssandra-operator/pkg/encryption"
 	"github.com/k8ssandra/k8ssandra-operator/pkg/images"
+	"github.com/k8ssandra/k8ssandra-operator/pkg/utils"
 	"github.com/stretchr/testify/assert"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/resource"
@@ -278,9 +279,9 @@ func TestLivenessProbe(t *testing.T) {
 func TestEnableCors(t *testing.T) {
 	reaper := newTestReaper()
 
-	deployment = NewDeployment(reaper, newTestDatacenter(), nil, nil)
-	podSpec = deployment.Spec.Template.Spec
-	container = podSpec.Containers[0]
+	deployment := NewDeployment(reaper, newTestDatacenter(), nil, nil)
+	podSpec := deployment.Spec.Template.Spec
+	container := podSpec.Containers[0]
 	envVar := utils.FindEnvVar(container.Env, "REAPER_ENABLE_CROSS_ORIGIN")
 	assert.Nil(t, envVar)
 
@@ -288,7 +289,7 @@ func TestEnableCors(t *testing.T) {
 	deployment = NewDeployment(reaper, newTestDatacenter(), nil, nil)
 	podSpec = deployment.Spec.Template.Spec
 	container = podSpec.Containers[0]
-	envVar := utils.FindEnvVar(container.Env, "REAPER_ENABLE_CROSS_ORIGIN")
+	envVar = utils.FindEnvVar(container.Env, "REAPER_ENABLE_CROSS_ORIGIN")
 	assert.Nil(t, envVar)
 
 	reaper.Spec.EnableCors = true
