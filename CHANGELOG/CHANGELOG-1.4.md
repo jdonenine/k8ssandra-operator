@@ -15,6 +15,8 @@ When cutting a new release, update the `unreleased` heading to the tag being gen
 
 ## unreleased
 
+* [ENHANCEMENT] [#773](https://github.com/k8ssandra/k8ssandra-operator/issues/773) Allow for CORS to be enabled on Reaper
+
 ## v1.4.0 - 2022-11-18
 
 * [ENHANCEMENT] [#766](https://github.com/k8ssandra/k8ssandra-operator/issues/766) Upgrade Reaper to v3.2.1
