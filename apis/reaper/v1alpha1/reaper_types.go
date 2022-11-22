@@ -138,6 +138,11 @@ type ReaperTemplate struct {
 	// (unless overriden by DC specific settings)
 	// +optional
 	Telemetry *telemetryapi.TelemetrySpec `json:"telemetry,omitempty"`
+
+	// If Cross-origin requests should be properly supported by the server when made via a browser.
+	// +optional
+	// +kubebuilder:default=false
+	EnableCors bool `json:"enableCors,omitempty"`
 }
 
 // AutoScheduling includes options to configure the auto scheduling of repairs for new clusters.
@@ -257,11 +262,6 @@ type ReaperSpec struct {
 	// +optional
 	// +kubebuilder:default=false
 	SkipSchemaMigration bool `json:"skipSchemaMigration,omitempty"`
-
-	// If Cross-origin requests should be properly supported by the server when made via a browser.
-	// +optional
-	// +kubebuilder:default=false
-	EnableCors bool `json:"enableCors,omitempty"`
 }
 
 // ReaperProgress is a word summarizing the state of a Reaper resource.
